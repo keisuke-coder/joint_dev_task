@@ -223,12 +223,32 @@ end
 
 class UserQ20
   # 以下に回答を記載
+  attr_accessor :name, :age
 
+  def initialize(name:, age:)
+    @name = name
+    @age = age
+  end
 end
 
 class Zoo
   # 以下に回答を記載
+  def initialize(name:, entry_fee:)
+    @name = name
+    @entry_fee = entry_fee
+  end
 
+  def info_entry_fee(user)
+    if (0..5).cover?(user.age)
+      puts "#{user.name}さんの入場料は #{@entry_fee.fetch(:infant)} 円です。"
+    elsif (6..12).cover?(user.age)
+      puts "#{user.name}さんの入場料は #{@entry_fee.fetch(:children)} 円です。"
+    elsif (13..64).cover?(user.age)
+      puts "#{user.name}さんの入場料は #{@entry_fee.fetch(:adult)} 円です。"
+    elsif (65..120).cover?(user.age)
+      puts "#{user.name}さんの入場料は #{@entry_fee.fetch(:senior)} 円です。"
+    end
+  end
 end
 
 
