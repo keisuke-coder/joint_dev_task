@@ -188,9 +188,9 @@ class UserQ18
 
   def introduce
     if @age >= 18
-      return "こんにちは,#{@name}と申します。よろしくお願いいたします。"
+      "こんにちは,#{@name}と申します。よろしくお願いいたします。"
     else
-      return "はいさいまいど〜,#{@name}です!!!"
+      "はいさいまいど〜,#{@name}です!!!"
     end
   end
 end
@@ -206,12 +206,10 @@ end
 
 class Item
   # 以下を修正して下さい
+  attr_reader :name
+  
   def initialize(name:)
     @name = name
-  end
-
-  def name
-    return @name
   end
 end
 
@@ -223,7 +221,7 @@ end
 
 class UserQ20
   # 以下に回答を記載
-  attr_accessor :name, :age
+  attr_reader :name, :age
 
   def initialize(name:, age:)
     @name = name
@@ -239,15 +237,16 @@ class Zoo
   end
 
   def info_entry_fee(user)
-    if (0..5).cover?(user.age)
-      puts "#{user.name}さんの入場料は #{@entry_fee.fetch(:infant)} 円です。"
-    elsif (6..12).cover?(user.age)
-      puts "#{user.name}さんの入場料は #{@entry_fee.fetch(:children)} 円です。"
-    elsif (13..64).cover?(user.age)
-      puts "#{user.name}さんの入場料は #{@entry_fee.fetch(:adult)} 円です。"
-    elsif (65..120).cover?(user.age)
-      puts "#{user.name}さんの入場料は #{@entry_fee.fetch(:senior)} 円です。"
-    end
+    case user.age
+    when 0..5 then
+      puts "#{user.name}さんの入場料は #{@entry_fee[:infant]} 円です。"
+    when 6..13 then
+      puts "#{user.name}さんの入場料は #{@entry_fee[:children]} 円です。"
+    when 13..64 then
+      puts "#{user.name}さんの入場料は #{@entry_fee[:adult]} 円です。"
+    when 65..120 then
+      puts "#{user.name}さんの入場料は #{@entry_fee[:senior]} 円です。"
+    end      
   end
 end
 
